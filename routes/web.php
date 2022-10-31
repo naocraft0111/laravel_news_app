@@ -34,6 +34,11 @@ Route::group(['middleware' => ['auth.admin']], function() {
     Route::post('/admin/logout', [AdminLogoutController::class, 'logout']);
     // ユーザー一覧
     Route::get('/admin/user_list', [ManageUserController::class, 'showUserList']);
+
+    // ユーザー登録
+    Route::get('/admin/user/create', [ManageUserController::class, 'showUserCreateForm']);
+    Route::post('/admin/user/create', [ManageUserController::class, 'create']);
+
     // ユーザー詳細
     Route::get('/admin/user/{id}', [ManageUserController::class, 'showUserDetail']);
 

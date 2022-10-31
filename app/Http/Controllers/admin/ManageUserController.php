@@ -20,4 +20,9 @@ class ManageUserController extends Controller
         return view("admin.user_detail", compact("user"));
     }
 
+    // ユーザー登録フォーム
+    function showUserCreateForm(){
+        return view("admin.user_create");
+    }
+
 }

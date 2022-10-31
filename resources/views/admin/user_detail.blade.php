@@ -7,7 +7,9 @@
             <a href="{{ url('admin/user_list') }}">ユーザー一覧</a> &gt; ユーザー詳細
         </div>
         <div class="card-body">
-
+            <div class="mb-3">
+                <a href="{{ url('u/' . $user->display_name) }}" class="btn btn-secondary">ユーザーページを確認</a>
+            </div>
             @if ($errors->any())
             <div style="color: red;">
             <ul>

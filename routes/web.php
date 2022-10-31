@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AdminTopController;
 use App\Http\Controllers\admin\AdminLogoutController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\ManageUserController;
+use App\Http\Controllers\UserPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::get('/', function () {
 Auth::routes(["register" => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// ユーザーページ
+Route::get('/u/{name}', [UserPageController::class, 'show']);
 
 // 管理側
 Route::group(['middleware' => ['auth.admin']], function() {

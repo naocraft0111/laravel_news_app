@@ -19,18 +19,18 @@
             <form method="post" action="{{ url('admin/user/create') }}">
             @csrf
             <div class="form-group">
-                名前: <input class="form-control" type="text" name="name" value="" />
+                名前: <input class="form-control" type="text" name="name" value="{{ old('name') }}" />
                 <p class="text-muted">表示名は自由に設定できます</p>
             </div>
             <div class="form-group">
-                Email: <input class="form-control" type="email" name="email" value="" />
+                Email: <input class="form-control" type="email" name="email" value="{{ old('email') }}" />
             </div>
             <div class="form-group">
-                表示名: <input class="form-control" type="email" name="display_name" value="" />
+                表示名: <input class="form-control" type="text" name="display_name" value="{{ old('display_name') }}" />
                 <p class="text-muted">半角英数字(30文字以内)</p>
             </div>
             <div class="form-group">
-                ログインパスワード: <input class="form-control" type="password" name="password" value="" />
+                ログインパスワード: <input class="form-control" type="password" name="password" value="{{ old('password') }}" />
             </div>
             <div class="form-group">
                 ログインパスワード (確認) : <input class="form-control" type="password" name="password_confirmation" value="" />

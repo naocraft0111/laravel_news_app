@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth.admin']], function() {
 
     // ユーザー詳細
     Route::get('/admin/user/{id}', [ManageUserController::class, 'showUserDetail']);
-
+    Route::post('/admin/user/{id}', [ManageUserController::class, 'update']);
 });
 
 // 管理側ログイン

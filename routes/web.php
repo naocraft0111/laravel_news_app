@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminLogoutController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\ManageUserController;
 use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\user\ManageEntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,16 @@ Route::group(['middleware' => ['auth.admin']], function() {
 // 管理側ログイン
 Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm']);
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
+
+// ユーザーログインが必須のページ
+Route::group(['middleware' => ['auth']], function() {
+
+    // 記事の作成
+    Route::get('/news/create', [ManageEntryController::class, 'showCreateForm']);
+    Route::post('/news/create', [ManageEntryController::class, 'create']);
+    // 記事の編集
+    Route::get('/news/edit/{id}', [ManageEntryController::class, 'showEditForm']);
+    Route::post('/news/edit/{id}', [ManageEntryController::class, 'update']);
+    // 記事の削除
+    Route::get('/news/delete/{id}', [ManageUserController::class, 'delete']);
+});

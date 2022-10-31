@@ -13,8 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                        <div class="mb-3">
+                            <a href="{{ url('/news/create') }}" class="btn btn-primary">記事作成</a>
+                        </div>
                 </div>
             </div>
         </div>

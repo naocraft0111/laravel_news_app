@@ -44,11 +44,19 @@ class ManageEntryController extends Controller
 
         return redirect("home")->withStatus("記事を作成しました");
     }
-    
+
     // 記事の編集
-    function showEditForm(){
-        return view("news.edit_form");
+    function showEditForm($id){
+        $user = Auth::user();
+        $news = $user->newsEntry()->find($id);
+        
+        if(!$news){
+            return redirect("home")->withStatus("記事がありません");
+        }
+
+        return view("news.edit_form", compact("news"));
     }
+
     function update(Request $request, $id){
         // @TODO 記事の更新
         return redirect("home")->withStatus("記事を更新しました");

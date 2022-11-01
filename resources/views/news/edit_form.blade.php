@@ -36,6 +36,12 @@
             </div>
 
             </form>
+
+            <hr />
+            <form method="post" action="{{ url('news/delete/' . $news->id) }}">
+            @csrf
+            <input class="btn btn-primary" type="submit" value="記事の削除" />
+            </form>
         </div>
     </div>
 </div>

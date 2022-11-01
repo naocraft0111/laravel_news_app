@@ -90,11 +90,18 @@ class ManageEntryController extends Controller
         $news->thumbnail_url = "";
         $news->image_url = "";
         $news->save();
-        
+
         return redirect("home")->withStatus("記事を更新しました");
     }
     // 記事の削除
     function delete($id){
+        $user = Auth::user();
+        $news = $user->newsEntry()->find($id);
+
+        if(!$news){
+            return redirect("home")->withStatus("記事がありません");
+        }
+        $news->delete();
         return redirect("home")->withStatus("記事を削除しました");
     }
 }

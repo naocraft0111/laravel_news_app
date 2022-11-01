@@ -65,5 +65,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/news/edit/{id}', [ManageEntryController::class, 'showEditForm']);
     Route::post('/news/edit/{id}', [ManageEntryController::class, 'update']);
     // 記事の削除
-    Route::get('/news/delete/{id}', [ManageUserController::class, 'delete']);
+    Route::post('/news/delete/{id}', [ManageEntryController::class, 'delete']);
 });

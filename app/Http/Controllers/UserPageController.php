@@ -14,6 +14,12 @@ class UserPageController extends Controller
         if(!$user){
             return abort(404);
         }
-        return view("user_page", compact("user"));
+
+        // NewsEntryのうち、user_idが現在ログイン中のユーザーのIDと一致するものを取得
+        $news_list = $user->newsEntry()
+                    ->orderBy("id", "desc")
+                    ->paginate(10);
+
+        return view("user_page", compact("user", "news_list"));
     }
 }

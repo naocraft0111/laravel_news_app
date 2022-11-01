@@ -16,7 +16,8 @@
             </div>
             @endif
 
-            <form method="post" action="{{ url('news/edit/' . $news->id ) }}">
+            <form method="post" action="{{ url('news/edit/' . $news->id ) }}"
+                enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>タイトル: </label><br />
@@ -29,6 +30,21 @@
             <div class="form-group">
                 <label>本文: </label><br />
                 <textarea class="form-control" name="body">{{ old('body', $news->body) }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>画像: </label><br />
+                @if ($news->image_url)
+                <img src="{{ Storage::url($news->image_url) }}" style="width: 150px;" />
+                @endif
+                <input type="file" class="form-control" name="image">
+            </div>
+            <div class="form-group">
+                <label>サムネイル: </label><br />
+                @if ($news->thumbnail_url)
+                <img src="{{ Storage::url($news->thumbnail_url) }}" style="width: 150px;" />
+                @endif
+                <input type="file" class="form-control" name="thumbnail">
+                <p class="text-muted">サムネイルは画像と別に指定することができます</p>
             </div>
 
             <div class="mt-3">

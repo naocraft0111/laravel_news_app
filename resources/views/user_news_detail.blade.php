@@ -7,6 +7,9 @@
         </div>
         <div class="card-body">
             <h5>{{ $news->title }}</h5>
+            @if($news->image_url)
+                <img src="{{ Storage::url($news->image_url) }}" style="width: 150px;" />
+            @endif
             <p>create: {{ $news->created_at->format("Y-m-d H:i:s") }}</p>
             <div>
                 {!! nl2br(e($news->body)) !!}

@@ -50,6 +50,14 @@
                         {{ $news_list->links() }}
                     </div>
 
+                    <div class="mt-3">
+                        <h4>埋め込み方法</h4>
+                        <textarea class="form-control"><{{ $embed_html }}</textarea>
+                        <p>こちらのコードをサイトに埋め込んでください</p>
+
+                        <h4>埋め込みプレビュー</h4>
+                        {!! $embed_html !!}
+                    </div>
                 </div>
             </div>
         </div>

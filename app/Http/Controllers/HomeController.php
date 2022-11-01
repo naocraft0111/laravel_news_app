@@ -33,10 +33,17 @@ class HomeController extends Controller
         $news_list = $user->newsEntry()
                     ->orderBy("id", "desc")
                     ->paginate(10);
-                    
-        return view('home', compact(
-            'user',
-            'news_list'
-        ));
+
+        // 埋め込み用HTMLの組み立て
+        $embed_html = [];
+		$embed_html[] = '<div style="width: 100%; height: 300px; margin:0; padding: 0px; border: none; max-width: 100%; min-width: 180px;">';
+		$embed_html[] = '<iframe src="'.url('/u/' . $user->display_name . '/?embed').'" style="width:100%;height:100%; border:none;"></iframe>';
+        $embed_html[] = '</div>';
+
+        return view("home", [
+			"news_list" => $news_list,
+			"user" => $user,
+            "embed_html" => implode("", $embed_html)
+		]);
     }
 }

@@ -49,7 +49,7 @@ class ManageEntryController extends Controller
     function showEditForm($id){
         $user = Auth::user();
         $news = $user->newsEntry()->find($id);
-        
+
         if(!$news){
             return redirect("home")->withStatus("記事がありません");
         }
@@ -57,8 +57,40 @@ class ManageEntryController extends Controller
         return view("news.edit_form", compact("news"));
     }
 
+    // 記事の更新
     function update(Request $request, $id){
-        // @TODO 記事の更新
+        $user = Auth::user();
+        $news = $user->newsEntry()->find($id);
+
+        if(!$news){
+            return redirect("home")->withStatus("記事がありません");
+        }
+
+        // 入力値の受け取り
+        $input = $request->only('title', 'description', 'body');
+
+        $validator = Validator::make($input, [
+            'title' => 'required|string|max:200',
+            'description' => 'string|max:200',
+            'body' => 'required|string',
+        ]);
+
+        // バリデーション失敗
+        if($validator->fails()){
+            return redirect('news/edit/' . $news->id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // バリデーション成功
+        $news->title = $input["title"];
+        $news->description = $input["description"];
+        $news->body = $input["body"];
+        $news->user_id = Auth::id();
+        $news->thumbnail_url = "";
+        $news->image_url = "";
+        $news->save();
+        
         return redirect("home")->withStatus("記事を更新しました");
     }
     // 記事の削除

@@ -29,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // ユーザーページ
 Route::get('/u/{name}', [UserPageController::class, 'show']);
+// ユーザーページ記事詳細
+Route::get('/u/{name}/{id}', [UserPageController::class, 'showDetail']);
 
 // 管理側
 Route::group(['middleware' => ['auth.admin']], function() {

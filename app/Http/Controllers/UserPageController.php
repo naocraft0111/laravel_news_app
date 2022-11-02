@@ -9,7 +9,7 @@ use App\Models\User;
 class UserPageController extends Controller
 {
     // ユーザーページ
-    function show($name){
+    function show(Request $request, $name){
 
         $user = User::where("display_name", $name)->first();
         if(!$user){
@@ -21,11 +21,18 @@ class UserPageController extends Controller
                     ->orderBy("id", "desc")
                     ->paginate(10);
 
+        if($request->has("embed")){
+            return view("user_page_embed", compact(
+                "news_list",
+                "user"
+            ));
+        }
+
         return view("user_page", compact("user", "news_list"));
     }
 
     // ユーザーページ記事詳細
-    function showDetail($name, $id){
+    function showDetail(Request $request, $name ,$id){
 
         $news = NewsEntry::find($id);
         if(!$news){
@@ -36,6 +43,13 @@ class UserPageController extends Controller
         // display_nameが違う(不正なアクセス!)
         if($user->display_name != $name){
             return abort(404);
+        }
+
+        if($request->has("embed")){
+            return view("user_news_detail_embed", compact(
+                "news",
+                "user"
+            ));
         }
 
         return view("user_news_detail", compact("news", "user"));
